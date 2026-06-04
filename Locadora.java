@@ -21,19 +21,20 @@ public class Locadora {
             String linha;
 
             while ((linha = buffer.readLine())!= null ) {
-                String[] partes = linha.split(";");
+                String[] partes = linha.split("\t");
 
                 int codigo = Integer.parseInt(partes[0]);
                 String modelo = partes[1];
                 String cor = partes[2];
                 int ano = Integer.parseInt(partes[3]);
+                int odometro = Integer.parseInt(partes[4]);
                 String cidade = partes[5];
                 boolean disponivel = Boolean.parseBoolean(partes[6]);
                 double valorDiaria = Double.parseDouble(partes[7]);
                 double valorKm =  Double.parseDouble(partes[8]);
 
                 
-                Veiculo v = new Veiculo(codigo, modelo, cor, ano, ano, cidade, disponivel, valorKm, valorKm);
+                Veiculo v = new Veiculo(codigo, modelo, cor, ano, odometro, cidade, disponivel,valorDiaria, valorKm);
 
                 this.veiculos.add(v);
             }
