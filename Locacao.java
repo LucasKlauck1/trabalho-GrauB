@@ -35,4 +35,39 @@ public class Locacao {
         return this.km_rodado * veiculo.getValorKmRodado();
     }
 
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public String getOrigem() {
+        return origem;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public int getKm_rodado() {
+        return km_rodado;
+    }
+
+    public int getQt_dias_reserva() {
+        return qt_dias_reserva;
+    }
+
+    public int getQt_dias_realizado() {
+        return qt_dias_realizado;
+    }
+
+    
+
+
 }

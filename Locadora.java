@@ -43,6 +43,20 @@ public class Locadora {
         }
     }
 
+    public void realizaLocacao(String nomeClient, String cidadeOrigem, int codigoVeiculo, int dias) {
+        for (Locacao l : locacoes ) {
+            if (l.getCliente().equals(nomeClient)) {
+                System.out.println("Cliente ja possui uma locação ativa!");
+                return;
+            }
+        }
+
+        Veiculos v = consultarVeiculo(codigoVeiculo);
+
+        if (v != null && v.set)
+    }
+
+
     public Veiculo consultarVeiculo(int codigo) {
         for (Veiculo v : veiculos) {
             if (v.getCodigo() == codigo) {
