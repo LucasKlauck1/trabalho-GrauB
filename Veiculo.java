@@ -9,7 +9,7 @@ public class Veiculo {
     private double valor_diaria;
     private double valor_km_rodado;
 
-    // Seu construtor atual está perfeito aqui...
+    
     public Veiculo(int codigo, String modelo, String cor, int ano, int odometro, String cidade, boolean disponivel, double valor_diaria, double valor_km_rodado) {
         this.codigo = codigo;
         this.modelo = modelo;

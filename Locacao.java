@@ -27,11 +27,12 @@ public class Locacao {
         } else {
             dias = this.qt_dias_reserva;
         }
-        // return;
+         return dias * veiculo.getValorDiaria();
     }
 
     public double calcularValorKmRodado() {
-        // return ;
+        
+        return this.km_rodado * veiculo.getValorKmRodado();
     }
 
 }
