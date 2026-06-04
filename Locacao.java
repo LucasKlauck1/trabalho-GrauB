@@ -8,7 +8,8 @@ public class Locacao {
     private int qt_dias_reserva;
     private int qt_dias_realizado;
 
-    public Locacao(int codigo, String cliente, String origem, String destino, int km_rodado, int qt_dias_reserva, int qt_dias_realizado) {
+    public Locacao(int codigo, String cliente, String origem, String destino, int km_rodado, int qt_dias_reserva,
+            int qt_dias_realizado) {
         this.codigo = codigo;
         this.cliente = cliente;
         this.origem = origem;
@@ -19,12 +20,18 @@ public class Locacao {
     }
 
     public double calcularValorDiarias() {
-        int dias = (this.qt_dias_realizado > 0) ? this.qt_dias_realizado : this.qt_dias_reserva;
-        //return; 
+        int dias;
+
+        if (this.qt_dias_realizado > 0) {
+            dias = this.qt_dias_realizado;
+        } else {
+            dias = this.qt_dias_reserva;
+        }
+        // return;
     }
-    
+
     public double calcularValorKmRodado() {
-        //return ;
+        // return ;
     }
 
 }
