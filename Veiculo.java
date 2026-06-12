@@ -33,8 +33,8 @@ public class Veiculo {
     
     public boolean isDisponivel() { return disponivel; } 
     
-
     public double getValorDiaria() { return valor_diaria; }
+
     public double getValorKmRodado() { return valor_km_rodado; }
 
     public void setDisponivel(boolean disponivel) { 
@@ -47,5 +47,48 @@ public class Veiculo {
 
     public void setOdometro(int odometro) { 
         this.odometro = odometro; 
+    }
+
+    public String serializar() {
+
+        return codigo + "\t" +
+                modelo + "\t" +
+                cor + "\t" +
+                ano + "\t" +
+                odometro + "\t" +
+                cidade + "\t" +
+                disponivel + "\t" +
+                valor_diaria + "\t" +
+                valor_km_rodado;
+    }
+
+    public static Veiculo deserializar(String linha) {
+    String[] partes = linha.split("\t");
+    int codigo = Integer.parseInt(partes[0]);
+    String modelo = partes[1];
+    String cor = partes[2];
+    int ano = Integer.parseInt(partes[3]);
+    int odometro = Integer.parseInt(partes[4]);
+    String cidade = partes[5];
+    boolean disponivel = Boolean.parseBoolean(partes[6]);
+    double valorDiaria = Double.parseDouble(partes[7]);
+    double valorKm = Double.parseDouble(partes[8]);
+    
+    return new Veiculo(codigo, modelo, cor, ano, odometro, cidade, disponivel, valorDiaria, valorKm);
+    
+    }
+
+     @Override
+    public String toString() {
+
+        return "Código: " + codigo +
+                "\nModelo: " + modelo +
+                "\nCor: " + cor +
+                "\nAno: " + ano +
+                "\nOdômetro: " + odometro +
+                "\nCidade: " + cidade +
+                "\nDisponível: " + disponivel +
+                "\nValor diária: R$ " + valor_diaria +
+                "\nValor KM: R$ " + valor_km_rodado;
     }
 }
