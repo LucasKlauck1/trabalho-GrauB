@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Locacao {
+
     private Veiculo veiculo;
-    private int codigo;
     private String cliente;
     private String origem;
     private String destino;
@@ -10,11 +10,9 @@ public class Locacao {
     private int qt_dias_reserva;
     private int qt_dias_realizado;
 
-    public Locacao(Veiculo veiculo, int codigo, String cliente, String origem, String destino, int km_rodado,
-            int qt_dias_reserva, int qt_dias_realizado) {
+    public Locacao(Veiculo veiculo, String cliente, String origem, String destino, int km_rodado, int qt_dias_reserva, int qt_dias_realizado) {
 
         this.veiculo = veiculo;
-        this.codigo = codigo;
         this.cliente = cliente;
         this.origem = origem;
         this.destino = destino;
@@ -23,11 +21,9 @@ public class Locacao {
         this.qt_dias_realizado = qt_dias_realizado;
     }
 
-    public Locacao(Veiculo veiculo, int codigo, String cliente, String origem,
-            int qt_dias_reserva) { // sobrecarga do construtor
-
+    //sobrecarga do construtor
+    public Locacao(Veiculo veiculo, String cliente, String origem, int qt_dias_reserva) { 
         this.veiculo = veiculo;
-        this.codigo = codigo;
         this.cliente = cliente;
         this.origem = origem;
 
@@ -39,27 +35,24 @@ public class Locacao {
     }
 
     public double calcularValorDiarias() {
+
         int dias;
 
-        if (this.qt_dias_realizado > 0) {
-            dias = this.qt_dias_realizado;
+        if (qt_dias_realizado > 0) {
+            dias = qt_dias_realizado;
         } else {
-            dias = this.qt_dias_reserva;
+            dias = qt_dias_reserva;
         }
+
         return dias * veiculo.getValorDiaria();
     }
 
     public double calcularValorKmRodado() {
-
-        return this.km_rodado * veiculo.getValorKmRodado();
+        return km_rodado * veiculo.getValorKmRodado();
     }
 
     public Veiculo getVeiculo() {
         return veiculo;
-    }
-
-    public int getCodigo() {
-        return codigo;
     }
 
     public String getCliente() {
@@ -109,13 +102,12 @@ public class Locacao {
     public String serializar() {
 
         return veiculo.getCodigo() + "\t" +
-                codigo + "\t" +
-                cliente + "\t" +
-                origem + "\t" +
-                destino + "\t" +
-                km_rodado + "\t" +
-                qt_dias_reserva + "\t" +
-                qt_dias_realizado;
+               cliente + "\t" +
+               origem + "\t" +
+               destino + "\t" +
+               km_rodado + "\t" +
+               qt_dias_reserva + "\t" +
+               qt_dias_realizado;
     }
 
     public static Locacao deserializar(
@@ -125,7 +117,6 @@ public class Locacao {
         String[] partes = linha.split("\t");
 
         int codigoVeiculo = Integer.parseInt(partes[0]);
-        int codigoLocacao = Integer.parseInt(partes[1]);
 
         Veiculo veiculo = null;
 
@@ -138,26 +129,23 @@ public class Locacao {
 
         return new Locacao(
                 veiculo,
-                codigoLocacao,
+                partes[1],
                 partes[2],
                 partes[3],
-                partes[4],
+                Integer.parseInt(partes[4]),
                 Integer.parseInt(partes[5]),
-                Integer.parseInt(partes[6]),
-                Integer.parseInt(partes[7]));
+                Integer.parseInt(partes[6]));
     }
 
     @Override
     public String toString() {
 
-        return "Código Locação: " + codigo +
-                "\nCliente: " + cliente +
-                "\nVeículo: " + veiculo.getModelo() +
-                "\nOrigem: " + origem +
-                "\nDestino: " + destino +
-                "\nKm Rodado: " + km_rodado +
-                "\nDias Reservados: " + qt_dias_reserva +
-                "\nDias Utilizados: " + qt_dias_realizado;
+        return "Cliente: " + cliente +
+               "\nVeículo: " + veiculo.getModelo() +
+               "\nOrigem: " + origem +
+               "\nDestino: " + destino +
+               "\nKm Rodado: " + km_rodado +
+               "\nDias Reservados: " + qt_dias_reserva +
+               "\nDias Utilizados: " + qt_dias_realizado;
     }
-
 }

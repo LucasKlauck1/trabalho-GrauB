@@ -51,13 +51,22 @@ public class Veiculo {
 
     public String serializar() {
 
+        String disponivelTexto;
+
+        if (disponivel) {
+            disponivelTexto = "S";
+        } else {
+            disponivelTexto = "N";
+        }
+        //faz que apareca S em caso de disponivel e N caso nao disponivel ao inves de true or false
+
         return codigo + "\t" +
                 modelo + "\t" +
                 cor + "\t" +
                 ano + "\t" +
                 odometro + "\t" +
                 cidade + "\t" +
-                disponivel + "\t" +
+                disponivelTexto + "\t" +
                 valor_diaria + "\t" +
                 valor_km_rodado;
     }
@@ -70,7 +79,7 @@ public class Veiculo {
     int ano = Integer.parseInt(partes[3]);
     int odometro = Integer.parseInt(partes[4]);
     String cidade = partes[5];
-    boolean disponivel = Boolean.parseBoolean(partes[6]);
+    boolean disponivel = partes[6].equalsIgnoreCase("S");
     double valorDiaria = Double.parseDouble(partes[7]);
     double valorKm = Double.parseDouble(partes[8]);
     

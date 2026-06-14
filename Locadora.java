@@ -19,6 +19,8 @@ public class Locadora {
 
             String linha;
 
+            leDadosVeiculo.readLine();
+
             while ((linha = leDadosVeiculo.readLine()) != null) {
                 veiculos.add(Veiculo.deserializar(linha));
             }
@@ -35,11 +37,10 @@ public class Locadora {
 
             String linha;
 
+            leDadosVeiculo.readLine();
+
             while ((linha = leDadosVeiculo.readLine()) != null) {
-
-                Locacao locacao = Locacao.deserializar(linha, veiculos);
-
-                locacoes.add(locacao);
+                locacoes.add(Locacao.deserializar(linha, veiculos));
             }
 
             leDadosVeiculo.close();
@@ -53,8 +54,7 @@ public class Locadora {
 
         try {
 
-            BufferedWriter escreveDadosVeiculo =
-                    new BufferedWriter(new FileWriter("veiculos.txt"));
+            BufferedWriter escreveDadosVeiculo = new BufferedWriter(new FileWriter("veiculos.txt"));
 
             for (Veiculo v : veiculos) {
                 escreveDadosVeiculo.write(v.serializar());
@@ -147,12 +147,8 @@ public class Locadora {
             }
         }
 
-        int codigoLocacao = locacoes.size() + 1;
-
-        Locacao locacao =
-                new Locacao(
+        Locacao locacao = new Locacao(
                         veiculo,
-                        codigoLocacao,
                         cliente,
                         veiculo.getCidade(),
                         diasReserva);
@@ -271,8 +267,7 @@ public class Locadora {
 
             if (l.getQt_dias_realizado() > l.getQt_dias_reserva()) {
 
-                int diasExtras =
-                        l.getQt_dias_realizado() - l.getQt_dias_reserva();
+                int diasExtras = l.getQt_dias_realizado() - l.getQt_dias_reserva();
 
                 valorDiariasExtras += diasExtras * l.getVeiculo().getValorDiaria();
             }
