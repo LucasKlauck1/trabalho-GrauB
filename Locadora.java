@@ -53,8 +53,11 @@ public class Locadora {
     public void salvaDados() {
 
         try {
-
             BufferedWriter escreveDadosVeiculo = new BufferedWriter(new FileWriter("veiculos.txt"));
+            
+            // Escreve o cabeçalho de volta no arquivo de veículos
+            escreveDadosVeiculo.write("codigo\tmodelo\tcor\tano\todometro\tcidade\tdisponivel\tvalorDiaria\tvalorKmRodado");
+            escreveDadosVeiculo.newLine();
 
             for (Veiculo v : veiculos) {
                 escreveDadosVeiculo.write(v.serializar());
@@ -68,16 +71,17 @@ public class Locadora {
         }
 
         try {
-
-            BufferedWriter escreveDadosVeiculo =
-                    new BufferedWriter(new FileWriter("locacoes.txt"));
+            BufferedWriter escreveDadosLocacao = new BufferedWriter(new FileWriter("locacoes.txt"));
+            
+            escreveDadosLocacao.write("veiculo\tcliente\torigem\tdestino\tkmRodado\tqtDiasReserva\tqtDiasRealizado");
+            escreveDadosLocacao.newLine();
 
             for (Locacao l : locacoes) {
-                escreveDadosVeiculo.write(l.serializar());
-                escreveDadosVeiculo.newLine();
+                escreveDadosLocacao.write(l.serializar());
+                escreveDadosLocacao.newLine();
             }
 
-            escreveDadosVeiculo.close();
+            escreveDadosLocacao.close();
 
         } catch (IOException e) {
             System.out.println("Erro ao salvar locações.");
@@ -115,6 +119,7 @@ public class Locadora {
 
         return resultado;
     }
+    /*ignoereCase -> tanto faz se for tudo maiusculo/minusculo iniciais maiusculas, minusculas ou o jeito de escrever*/
 
     public boolean realizaLocacao(
             int codigoVeiculo,
@@ -162,17 +167,21 @@ public class Locadora {
 
     public ArrayList<Locacao> consultaLocacao(String pesquisa) {
 
-        ArrayList<Locacao> resultado =
-                new ArrayList<>();
+        ArrayList<Locacao> resultado = new ArrayList<>();
 
         for (Locacao l : locacoes) {
+            
+            // verifica se bate o nome do cliente
+            boolean bateuCliente = l.getCliente().equalsIgnoreCase(pesquisa);
+            
+            // só tenta ler o modelo se l.getVeiculo() NÃO for null
+            boolean bateuVeiculo = l.getVeiculo() != null && l.getVeiculo().getModelo().equalsIgnoreCase(pesquisa);
 
-            if (l.getCliente().equalsIgnoreCase(pesquisa) || l.getVeiculo().getModelo().equalsIgnoreCase(pesquisa)) {
-
+            // se for o cliente ou o veículo, adiciona na lista
+            if (bateuCliente || bateuVeiculo) {
                 resultado.add(l);
             }
         }
-        //ignoereCase -> tanto faz se for tudo maiusculo/minusculo iniciais maiusculas ou o jeito de escrever
 
         return resultado;
     }
@@ -277,7 +286,7 @@ public class Locadora {
             valorTotal += l.calcularValorDiarias() + l.calcularValorKmRodado();
         }
 
-        System.out.println("\n===== RESUMO =====");
+        System.out.println("\n---- RESUMO ----");
         System.out.println("KM Rodados: " + totalKm);
         System.out.println("Dias Contratados: " + totalDiasReserva);
         System.out.println("Dias Realizados: " + totalDiasRealizados);
@@ -294,4 +303,6 @@ public class Locadora {
     public ArrayList<Locacao> getLocacoes() {
         return locacoes;
     }
+
+    
 }

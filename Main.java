@@ -11,7 +11,7 @@ public class Main {
 
         while (opcao != 8) {
 
-            System.out.println("\n===== LOCADORA =====");
+            System.out.println("\n---- LOCADORA ----");
             System.out.println("1 - Consultar veículos");
             System.out.println("2 - Realizar locação");
             System.out.println("3 - Realizar devolução");
@@ -25,7 +25,7 @@ public class Main {
 
             switch (opcao) {
                 case 1: {
-                    String atributo = Teclado.leString("Informe o atributo (modelo, cor, ano ou cidade): ");
+                    String atributo = Teclado.leString("Informe o modelo, cor, ano ou cidade: ");
                     String valor = Teclado.leString("Informe o valor buscado: ");
 
                     ArrayList<Veiculo> encontrados = locadora.consultaVeiculo(atributo, valor);
@@ -83,7 +83,7 @@ public class Main {
                             if (sucesso) {
                                 System.out.println("Locação realizada com sucesso!");
                             } else {
-                                System.out.println("Falha na locação. Cliente pode já ter locação ativa.");
+                                System.out.println("Falha na locação. O cliente pode ter locação ativa.");
                             }
                         } else {
                             System.out.println("Locação cancelada.");
@@ -105,7 +105,7 @@ public class Main {
                     }
 
                     if (locacaoAtiva == null) {
-                        System.out.println("Nenhuma locação ativa encontrada para este cliente.");
+                        System.out.println("Nenhuma locação ativa encontrada para " + nomeCliente);
                         break;
                     }
 
@@ -113,7 +113,7 @@ public class Main {
                     int kmPercorrida = Teclado.leInt("Informe a quilometragem percorrida: ");
 
                     System.out.println("Quantidade de diárias contratadas: " + locacaoAtiva.getQt_dias_reserva());
-                    int diasRealizados = Teclado.leInt("Confirme ou informe a quantidade real de dias utilizados: ");
+                    int diasRealizados = Teclado.leInt("Informe a quantidade real de dias utilizados: ");
 
                     double valorFinal = locadora.realizaDevolucao(nomeCliente, cidadeDevolucao, kmPercorrida, diasRealizados);
 
